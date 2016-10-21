@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri Oct 21 23:35:47 NZDT 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0157-e6cf-97d1-00000d6bbe60 
+Fri Oct 21 23:53:17 NZDT 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0157-e6df-9fba-00000d3de4b8 
 on database directory /Users/patriciadanielle/Documents/Eclipse/Connect4/HistoryDB with class loader sun.misc.Launcher$AppClassLoader@d16e5d6 
 Loaded from file:/Users/patriciadanielle/Documents/Eclipse/Connect4/lib/derby.jar
 java.vendor=Oracle Corporation

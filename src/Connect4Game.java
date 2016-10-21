@@ -135,7 +135,6 @@ public class Connect4Game extends Observable {
 		try {
 			Connection conn = DriverManager.getConnection
 					("jdbc:derby:HistoryDB;create=true","connect4","connect4");  
-			System.out.println("Connected to DB");
 			
 			Statement sql = conn.createStatement();
 			sql.executeUpdate("INSERT INTO matchHistory values('"+matchRecord+"')");

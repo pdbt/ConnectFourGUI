@@ -126,7 +126,12 @@ public class Connect4Controller {
 			System.out.println("SQL exception occured" + e);
 		}
 		
-		JOptionPane.showMessageDialog(view.getFrame(), displayedMatches);
+		// show dialog
+		if (displayedMatches == "") {
+			JOptionPane.showMessageDialog(view.getFrame(), "No match records to display.");
+		} else {
+			JOptionPane.showMessageDialog(view.getFrame(), "Most recent match records:\n"+displayedMatches);
+		}
 	}
 
 }
