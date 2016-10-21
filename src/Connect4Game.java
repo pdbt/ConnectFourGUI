@@ -1,8 +1,12 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Observable;
 
 /**
  * Connect4Game is the Model class containing all essential game components and logic: 
- * the board, players, turn counter, win check algorithm and match record.
+ * the board, players, turn counter and win check algorithm.
  * 
  * @author Patricia Danielle Tan
  */
@@ -124,12 +128,28 @@ public class Connect4Game extends Observable {
 	 * Starts a new match, maintaining score between players.
 	 */
 	public void newMatch() {
+		String matchRecord = this.playerX.getName()+" vs. "+this.playerO.getName()+
+				" - "+(this.checkWinner.getWinnerToken() == 'X' ? this.playerX.getName() : this.playerO.getName())+" wins!";
+		
+		// add match record (String) to database
+		try {
+			Connection conn = DriverManager.getConnection
+					("jdbc:derby:HistoryDB;create=true","connect4","connect4");  
+			System.out.println("Connected to DB");
+			
+			Statement sql = conn.createStatement();
+			sql.executeUpdate("INSERT INTO matchHistory values('"+matchRecord+"')");
+			
+			conn.close();
+		} catch(SQLException e) {
+			System.out.println("SQL exception occured" + e);
+		}
+		
 		this.board.clearBoard();
 		this.checkWinner.resetWinnerToken();
 		this.turnCount = 1;
 		setChanged();
 		notifyObservers();
-		// add match record (String) to database
 	}
 	
 	/**

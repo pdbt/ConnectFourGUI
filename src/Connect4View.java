@@ -221,6 +221,10 @@ public class Connect4View implements Observer, ActionListener {
 		if (event.getSource() == btnInstructions) {
 			controller.showInstructions();
 		}
+		// 'Match history' button press
+		if (event.getSource() == btnMatchHistory) {
+			controller.showMatchHistory();
+		}
 	}
 	
 	// ------------ access methods for unit testing purposes only ------------

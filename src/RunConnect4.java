@@ -28,9 +28,6 @@ public class RunConnect4 {
                 }
         );
 		
-		//DBtest db = new DBtest();
-		//db.establishConnection();
-		
     }
 	
     public static void createAndShowGUI() {

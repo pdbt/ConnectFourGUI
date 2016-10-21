@@ -1,3 +1,10 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Stack;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -77,6 +84,49 @@ public class Connect4Controller {
 	public void showInstructions() {
 		JOptionPane.showOptionDialog(view.getFrame(), "Click on one of the buttons above the game board to drop a token into the column below it.\nGet four same-colour tokens in a row vertically, horizontally or diagonally to win!"
 				, "How to Play", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, null);
+	}
+	
+	/**
+	 * Brings up a dialog showing the last 5 match histories from a database.
+	 */
+	public void showMatchHistory() {
+		int no_of_rows = 0;
+		String displayedMatches = "";
+		
+		try {
+			// connect to database and get match records
+			Connection conn = DriverManager.getConnection
+					("jdbc:derby:HistoryDB;create=true","connect4","connect4");  
+			
+			Statement stmt1 = conn.createStatement();
+			ResultSet rs1 = stmt1.executeQuery("SELECT * FROM matchHistory");
+			
+			// get most recent 5 match records to display
+			Stack<String> stack = new Stack<String>();		
+			while (rs1.next()) {
+				no_of_rows++;
+				stack.push(rs1.getString(1));
+			}
+			for (int i=0;i<5;i++) {
+				if (stack.empty()) {
+					break;
+				}
+				displayedMatches+=stack.pop()+"\n";
+			}
+			rs1.close();
+			
+			// clear database table once it reaches 20 stored records in order to prevent bloat
+			if (no_of_rows > 20) {
+				Statement stmt2 = conn.createStatement();
+				stmt2.executeUpdate("TRUNCATE TABLE matchHistory");	
+			}
+			
+			conn.close();	// close DB connection
+		} catch(SQLException e) {
+			System.out.println("SQL exception occured" + e);
+		}
+		
+		JOptionPane.showMessageDialog(view.getFrame(), displayedMatches);
 	}
 
 }
