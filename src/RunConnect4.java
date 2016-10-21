@@ -4,11 +4,6 @@
  * This program allows 2 human players to play a computer version of the classic board game Connect Four.
  * The program is written following the MVC pattern.
  * 
- * TODO:
- * JUnit tests - column drop button
- * Javadocs
- * Derby database component
- * 
  * @author Patricia Danielle Tan
  * @version 1.0 - 17.10.2016: Created
  */
